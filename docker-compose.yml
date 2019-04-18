@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  jira:
+    container_name: jira-software
+    restart: always
+    image: cptactionhank/atlassian-jira-software
+    # build:
+    #   context: ./jira
+    #   dockerfile:  Dockerfile
+    volumes:
+      - jira_data:/var/atlassian/jira
+    ports:
+      - 8080:8080
+    # networks:
+    #   - jiranet
+  confluence:
+    container_name: confluence
+    restart: always
+    image: atlassian/confluence-server
+    # build:
+    #   context: ./confluence
+    #   dockerfile: Dockerfile
+    volumes:
+      - confluence_data:/var/atlassian/application-data/confluence
+    ports :
+      - "8090:8090"
+      - "8091:8091"
+    # networks:
+    #   - jiranet
+volumes:
+  jira_data:
+  confluence_data:
+
+  # networks:
+  #   jiranet:
+  #     driver: bridge
